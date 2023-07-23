@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% block content%}
+
+<div class="container mt-5" style="background-color:#BCD4E6;">
+  <section class=" d-flex align-items-center" >
+    <div class=" mb-4 container">
+      <div class="row">
+        <div class="mt-5 col-lg-6 d-flex flex-column justify-content-center" >
+          <h1  ><b>Aplikasi Penataan Arsip dan Monitoring Alih Digital</b></h1>
+          <h4 class="mt-5" >Silahkan Login! </h4>
+          <div >
+            <div class="mt-5 text-left text-lg-start">
+              <a href="#" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'login' %}" >Login</a>
+                {% comment %} <a class="btn btn-secondary btn-lg" href="{% url 'login'%}" >Log in</a> {% endcomment %}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer-->
+  <footer class=" container py-2 mt-5 bg-dark">
+      <div class="container px-5 "><p class="m-0 text-center text-white">Copyright &copy; BWS-Malut@2023</p></div>
+  </footer>
+</div>
+
+{% endblock%}
