@@ -90,11 +90,11 @@ WSGI_APPLICATION = 'auth_validator.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "arsipdb3",
+        "NAME": "arsipserverdb",
         "USER": "root",
-        "PASSWORD": "1234",
+        "PASSWORD": "workshop21",
         "HOST": "127.0.0.1",
-        "PORT": "33061",
+        "PORT": "3306",
     }
 }
 
