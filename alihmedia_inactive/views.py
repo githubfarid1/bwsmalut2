@@ -63,6 +63,7 @@ def getdata(method, parquery):
         pdffound = False
         filesize = 0
         pagecount = 0
+        coverfilename = ""
         if exists(path):
             pdffound = True
             coverfilename = "{}_{}_{}.png".format(d.link, doc.bundle.box_number, doc.doc_number)
