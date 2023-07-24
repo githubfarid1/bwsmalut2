@@ -92,9 +92,9 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "arsipserverdb",
         "USER": "root",
-        "PASSWORD": "workshop21",
+        "PASSWORD": "1234",
         "HOST": "127.0.0.1",
-        "PORT": "3306",
+        "PORT": "33061",
     }
 }
 
