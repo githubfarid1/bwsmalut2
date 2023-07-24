@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'account',
     'crispy_forms',
     'alihmedia_inactive',
-    'bootstrap5',
+    # 'bootstrap5',
 
 ]
 
@@ -90,11 +90,11 @@ WSGI_APPLICATION = 'auth_validator.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "arsipserverdb",
+        "NAME": "arsipdb3",
         "USER": "root",
-        "PASSWORD": "workshop21",
+        "PASSWORD": "1234",
         "HOST": "127.0.0.1",
-        "PORT": "3306",
+        "PORT": "33061",
     }
 }
 

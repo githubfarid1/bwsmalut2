@@ -8,7 +8,7 @@ from os.path import exists
 from django.conf import settings
 import inspect
 import sys
-import fitz
+# import fitz
  
 # def get_size(file_path, unit='bytes'):
 #     file_size = os.path.getsize(file_path)
