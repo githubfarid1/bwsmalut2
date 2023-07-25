@@ -31,27 +31,26 @@
     ></script>
 
     <style>
-
       body {
         padding-top: 3rem;
         padding-bottom: 3rem;
         color: #5a5a5a;
       }
-
     </style>
   </head>
   <body>
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href={% url 'home' %}
-            ><img
+          <a class="navbar-brand" href="{% url 'home' %}">
+            <img
               src="{% static 'logo/bws.jpg' %}"
-              alt="Django"
+              alt="BWS Maluku Utara"
               width="50px"
               height="45px"
-            />&nbsp;&nbsp; BWS Maluku Utara</a
-          >
+            />
+            &nbsp;&nbsp;BWS Maluku Utara
+          </a>
           <button
             class="navbar-toggler"
             type="button"
@@ -76,14 +75,35 @@
                   Alih Media
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{% url 'irigasi' %}"> Inactive </a></li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'irigasi' %}">
+                      Inactive
+                    </a>
+                  </li>
                   <li><a class="dropdown-item" href="#"> Active </a></li>
                   <li><a class="dropdown-item" href="#"> Vital </a></li>
                 </ul>
               </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  data-bs-toggle="dropdown"
+                >
+                  Peminjaman
+                </a>
+              </li>
             </ul>
 
-            <button class="btn m-1 btn-outline-info"> Selamat Datang, {{user.username|title }}</button>
+            <button class="btn m-1" style="float: right; color: antiquewhite">
+              Selamat Datang, {{user.username|title }}
+            </button>
+            <a href="#"
+              ><button class="btn m-1 btn-outline-warning" type="submit">
+                Ganti Password
+              </button></a
+            >
+
             <a href="{% url 'logout' %}"
               ><button class="btn m-1 btn-outline-danger" type="submit">
                 Logout

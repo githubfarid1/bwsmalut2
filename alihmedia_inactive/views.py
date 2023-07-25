@@ -66,7 +66,7 @@ def getdata(method, parquery):
         coverfilename = ""
         if exists(path):
             pdffound = True
-            coverfilename = "{}_{}_{}.png".format(d.link, doc.bundle.box_number, doc.doc_number)
+            coverfilename = "{}_{}_{}_{}.png".format(__package__.split('.')[0], d.link, doc.bundle.box_number, doc.doc_number)
             # generatecover(pdffile=path, coverfilename=coverfilename)
             # filesize = get_size(path, "kb")
             # pagecount = get_page_count(pdffile=path)
@@ -261,7 +261,7 @@ def pdfdownload(request, link, doc_id):
     doc = Doc.objects.get(id=doc_id)
     path = os.path.join(settings.PDF_LOCATION, link, str(doc.bundle.box_number), str(doc.doc_number) + ".pdf")
     if exists(path):
-        filename = f"{link}_{doc.bundle.box_number}_{doc.doc_number}.pdf"
+        filename = f"{__package__.split('.')[0]}_{link}_{doc.bundle.box_number}_{doc.doc_number}.pdf"
         with open(path, 'rb') as pdf:
             response = HttpResponse(pdf.read(), content_type='application/pdf')
             response['Content-Disposition'] = f'inline;filename={filename}.pdf'
