@@ -104,7 +104,7 @@
           </div>
         </td>
         {% else %}
-        <td>{{ d.doc_description }}</td>
+        <td class="file-not-exist">{{ d.doc_description }}</td>
 
         {% endif %} {% if d.bundle_number != "" %}
         <td rowspan="{{ d.bundlespan }}">{{ d.bundle_year }}</td>

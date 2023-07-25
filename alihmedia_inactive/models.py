@@ -35,7 +35,7 @@ class Doc(models.Model):
     orinot = models.CharField(max_length=10)
     doc_type = models.CharField(max_length=20)
     description = models.TextField()
-    filesize = models.SmallIntegerField()
+    filesize = models.IntegerField()
     page_count = models.SmallIntegerField()
 
     bundle = models.ForeignKey(

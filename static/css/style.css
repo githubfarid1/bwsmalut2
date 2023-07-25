@@ -24,8 +24,8 @@ td > a {
 
 }
 
-td.file-exist {
-    background-color: yellow;
+td.file-not-exist {
+    background-color: cornsilk;
 }
 
 .summary {

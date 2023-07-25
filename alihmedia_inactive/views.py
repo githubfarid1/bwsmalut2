@@ -59,7 +59,7 @@ def getdata(method, parquery):
     curbundle_number = ""
     
     for ke, doc in enumerate(docs):
-        path = os.path.join(settings.PDF_LOCATION, d.link, str(doc.bundle.box_number), str(doc.doc_number) + ".pdf")
+        path = os.path.join(settings.PDF_LOCATION, __package__.split('.')[0], d.link, str(doc.bundle.box_number), str(doc.doc_number) + ".pdf")
         pdffound = False
         filesize = 0
         pagecount = 0
@@ -259,7 +259,7 @@ def keuangan(request):
 
 def pdfdownload(request, link, doc_id):
     doc = Doc.objects.get(id=doc_id)
-    path = os.path.join(settings.PDF_LOCATION, link, str(doc.bundle.box_number), str(doc.doc_number) + ".pdf")
+    path = os.path.join(settings.PDF_LOCATION, __package__.split('.')[0], link, str(doc.bundle.box_number), str(doc.doc_number) + ".pdf")
     if exists(path):
         filename = f"{__package__.split('.')[0]}_{link}_{doc.bundle.box_number}_{doc.doc_number}.pdf"
         with open(path, 'rb') as pdf:
