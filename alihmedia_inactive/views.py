@@ -169,16 +169,23 @@ def getdata(method, parquery):
 
 def summarydata(data):
     sumscan = 0
+    listyear = []
     for d in data:
+        if d['bundle_year'] is not None and d['bundle_year'].strip() != '':
+            listyear.append(d['bundle_year'])
         if d['pdffound'] == True:
             sumscan += 1
+    unyears = list(set(listyear))
+    # tes = unyears.sort()
+    unyears.sort()
+    unyearstr = ", ".join(unyears)
     sumnotscan = len(data) - sumscan
     try:
         percent = sumscan / len(data) * 100
     except:
         percent = 0
 
-    return (len(data), sumscan, sumnotscan, percent)
+    return (len(data), sumscan, sumnotscan, percent, unyearstr )
 
 def irigasi(request):
     funcname = sys._getframe().f_code.co_name
@@ -191,6 +198,7 @@ def irigasi(request):
         "totnotscan": summary[2],
         "totdata": summary[0],
         "percent": f"{summary[3]:.3f}",
+        "years": summary[4],
         "menu": getmenu(),
     }
     
@@ -208,6 +216,7 @@ def air_baku(request):
         "totnotscan": summary[2],
         "totdata": summary[0],
         "percent": f"{summary[3]:.3f}",
+        "years": summary[4],
         "menu": getmenu(),
     }
     return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
@@ -223,6 +232,7 @@ def sungai(request):
         "totnotscan": summary[2],
         "totdata": summary[0],
         "percent": f"{summary[3]:.3f}",
+        "years": summary[4],
         "menu": getmenu(),
     }
     return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
@@ -238,6 +248,7 @@ def pantai(request):
         "totnotscan": summary[2],
         "totdata": summary[0],
         "percent": f"{summary[3]:.3f}",
+        "years": summary[4],
         "menu": getmenu(),
     }
     return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
@@ -253,6 +264,7 @@ def keuangan(request):
         "totnotscan": summary[2],
         "totdata": summary[0],
         "percent": f"{summary[3]:.3f}",
+        "years": summary[4],
         "menu": getmenu(),
     }
     return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)

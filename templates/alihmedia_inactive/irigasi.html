@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 {% include 'alihmedia_inactive/menu.html'%}
 <div class="container">
-  <h3>Monitoring Alih Media Data Inactive</h3>
+  <h3>Monitoring Alih Media Data Inaktif</h3>
   <div class="summary">
     <form action="{% url link %}" class="row g-3" style="float: right">
       <div class="col-auto">
@@ -20,7 +20,7 @@
     <div class="col-auto">
       <p>
         Kategori: {{ link|title }} <br />Total Data: {{ totdata }} <br />Sudah
-        Proses: {{ totscan }}<br />Belum Proses: {{ totnotscan }}
+        Proses: {{ totscan }}<br />Belum Proses: {{ totnotscan }} <br/> Tahun: {{ years }}
       </p>
       <p>
         <label for="file">Progress:</label>
