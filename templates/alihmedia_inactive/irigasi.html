@@ -43,6 +43,7 @@
         <th scope="col">BOX</th>
         <th scope="col">NO BERKAS</th>
         <th scope="col">NO URUT</th>
+        <th scope="col">KODE</th>
         <th scope="col">INDEX</th>
         <th scope="col">URAIAN MASALAH</th>
         <th scope="col">TAHUN</th>
@@ -63,6 +64,10 @@
         <td rowspan="{{ d.bundlespan }}">{{ d.bundle_number }}</td>
         {% endif %}
         <td>{{ d.doc_number }}</td>
+        {% if d.bundle_number != "" %}
+        <td rowspan="{{ d.bundlespan }}">{{ d.bundle_code }}</td>
+        {% endif %}
+
         {% if d.bundle_number != "" %}
         <td rowspan="{{ d.bundlespan }}">{{ d.bundle_title }}</td>
         {% endif %} {% comment %}

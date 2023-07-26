@@ -197,7 +197,7 @@ def irigasi(request):
     return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
 
 
-def airbaku(request):
+def air_baku(request):
     funcname = sys._getframe().f_code.co_name
     data = getdata(method=request.method, parquery=request.GET.get("search"))
     summary = summarydata(data)
