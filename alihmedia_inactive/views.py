@@ -254,9 +254,45 @@ def pdfdownload(request, link, doc_id):
             return response
     raise Http404    
 
-
 def statistics(request):
+    deps = Department.objects.all()
+    depnamelist = []
+    depvaluelist = []
+    colorlist = []
+    foundall = 0
+    notfoundall = 0
+    for d in deps:
+        docs = Doc.objects.filter(bundle__department_id__exact=d.id)
+        found = 0
+        notfound = 0
+        total = len(docs)
+        for ke, doc in enumerate(docs):
+            path = os.path.join(settings.PDF_LOCATION, __package__.split('.')[0], d.link, str(doc.bundle.box_number), str(doc.doc_number) + ".pdf")
+            if exists(path):
+                foundall += 1
+                found += 1
+            else:
+                notfoundall += 1
+                notfound += 1
+        depnamelist.append(" | ".join([d.name, "Sudah"]))
+        depnamelist.append(" | ".join([d.name, "Belum"]))
+        depvaluelist.append(found)
+        depvaluelist.append(notfound)
+        colorlist.append("rgba(41,134,204,1.000)")
+        colorlist.append("rgba(244,204,204,1.000)")
+        total = foundall + notfoundall
+        procfound = foundall / total * 100
+        procnotfound = notfoundall / total * 100
+
     context = {
         "menu": getmenu(),
+        "depnamelist": depnamelist,
+        "depvaluelist": depvaluelist,
+        "colorlist": colorlist,
+        "foundall": str(foundall),
+        "notfoundall": str(notfoundall),
+        "procfound":f"{procfound:.3f}",
+        "procnotfound":f"{procnotfound:.3f}",
     }
+
     return render(request=request, template_name='alihmedia_inactive/statistics.html', context=context)
