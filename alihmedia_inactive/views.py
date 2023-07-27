@@ -8,31 +8,6 @@ from os.path import exists
 from django.conf import settings
 import inspect
 import sys
-# import fitz
- 
-# def get_size(file_path, unit='bytes'):
-#     file_size = os.path.getsize(file_path)
-#     exponents_map = {'bytes': 0, 'kb': 1, 'mb': 2, 'gb': 3}
-#     if unit not in exponents_map:
-#         raise ValueError("Must select from \
-#         ['bytes', 'kb', 'mb', 'gb']")
-#     else:
-#         size = file_size / 1024 ** exponents_map[unit]
-#         return round(size, 3)
-
-# def get_page_count(pdffile):
-#     doc = fitz.open(pdffile)
-#     return doc.page_count
-
-# def generatecover(pdffile, coverfilename):
-#     path = os.path.join(settings.COVER_LOCATION, coverfilename)
-#     if not exists(path):
-#         doc = fitz.open(pdffile)
-#         page = doc.load_page(0)
-#         pix = page.get_pixmap()
-#         # output = "outfile.png"
-#         pix.save(path)
-#         doc.close()        
               
 def getmenu():
     return Department.objects.all()
@@ -204,7 +179,6 @@ def irigasi(request):
     
     return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
 
-
 def air_baku(request):
     funcname = sys._getframe().f_code.co_name
     data = getdata(method=request.method, parquery=request.GET.get("search"))
@@ -281,3 +255,8 @@ def pdfdownload(request, link, doc_id):
     raise Http404    
 
 
+def statistics(request):
+    context = {
+        "menu": getmenu(),
+    }
+    return render(request=request, template_name='alihmedia_inactive/statistics.html', context=context)
