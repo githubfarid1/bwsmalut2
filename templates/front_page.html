@@ -1,6 +1,10 @@
 {% extends 'base.html'%}
 {% block content%}
-
+{% for message in messages %}
+    <div class="message {{ message.tags }}">
+        {{ message }}
+    </div>
+{% endfor %}
 <div class="container mt-5" style="background-color:#BCD4E6;">
   <section class=" d-flex align-items-center" >
     <div class=" mb-4 container">

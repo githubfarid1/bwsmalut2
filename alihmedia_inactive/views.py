@@ -166,6 +166,8 @@ def summarydata(data):
     return (len(data), sumscan, sumnotscan, percent, unyearstr )
 
 def irigasi(request):
+    if not request.user.is_authenticated:
+        return redirect('front_page')
     funcname = sys._getframe().f_code.co_name
     data = getdata(method=request.method, parquery=request.GET.get("search"))
     summary = summarydata(data)
@@ -183,6 +185,8 @@ def irigasi(request):
     return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
 
 def air_baku(request):
+    if not request.user.is_authenticated:
+        return redirect('front_page')
     funcname = sys._getframe().f_code.co_name
     data = getdata(method=request.method, parquery=request.GET.get("search"))
     summary = summarydata(data)
@@ -199,6 +203,8 @@ def air_baku(request):
     return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
 
 def sungai(request):
+    if not request.user.is_authenticated:
+        return redirect('front_page')
     funcname = sys._getframe().f_code.co_name
     data = getdata(method=request.method, parquery=request.GET.get("search"))
     summary = summarydata(data)
@@ -215,6 +221,9 @@ def sungai(request):
     return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
 
 def pantai(request):
+    if not request.user.is_authenticated:
+        return redirect('front_page')
+
     funcname = sys._getframe().f_code.co_name
     data = getdata(method=request.method, parquery=request.GET.get("search"))
     summary = summarydata(data)
@@ -231,6 +240,9 @@ def pantai(request):
     return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
 
 def keuangan(request):
+    if not request.user.is_authenticated:
+        return redirect('front_page')
+
     funcname = sys._getframe().f_code.co_name
     data = getdata(method=request.method, parquery=request.GET.get("search"))
     summary = summarydata(data)
@@ -247,6 +259,9 @@ def keuangan(request):
     return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
 
 def pdfdownload(request, link, doc_id):
+    if not request.user.is_authenticated:
+        return redirect('front_page')
+
     doc = Doc.objects.get(id=doc_id)
     path = os.path.join(settings.PDF_LOCATION, __package__.split('.')[0], link, str(doc.bundle.box_number), str(doc.doc_number) + ".pdf")
     if exists(path):
@@ -258,6 +273,9 @@ def pdfdownload(request, link, doc_id):
     raise Http404    
 
 def statistics(request):
+    if not request.user.is_authenticated:
+        return redirect('front_page')
+
     deps = Department.objects.all()
     depnamelist = []
     depvaluelist = []
