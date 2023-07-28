@@ -301,7 +301,7 @@ def statistics(request):
     docscan = []
     doccolor = []
     docdate = []
-    print(date_list)
+    # print(date_list)
     for d in date_list:
         pages = 0
         for fl in fileinfolist:
