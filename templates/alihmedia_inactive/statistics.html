@@ -30,7 +30,7 @@
         });
         var ctx = document.getElementById('chartall').getContext('2d');
         var myChart = new Chart(ctx, {
-            type: 'pie',
+            type: 'doughnut',
             data: {
                 labels: ["Sudah Scan =" + {{ foundall }}, "Belum Scan =" + {{ notfoundall }}], //loop through queryset,
                 datasets: [{
