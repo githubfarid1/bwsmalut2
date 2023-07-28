@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-8#vnt7wfp@kl7u-#=5(sdf+ab%5!dzhi+^iiu8_olwb01=z4@s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["10.10.10.245", "127.0.0.1"]
 
 
 # Application definition
@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
 
 ROOT_URLCONF = 'auth_validator.urls'
@@ -90,11 +91,11 @@ WSGI_APPLICATION = 'auth_validator.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "yourdb",
+        "NAME": "arsipdb3",
         "USER": "root",
-        "PASSWORD": "password",
+        "PASSWORD": "1234",
         "HOST": "127.0.0.1",
-        "PORT": "3306",
+        "PORT": "33061",
     }
 }
 
@@ -138,12 +139,16 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-# tes
+SESSION_EXPIRE_SECONDS = 1800  # Expire after 30 minutes
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+SESSION_TIMEOUT_REDIRECT = 'login/' # Add your URL
+SESSION_EXPIRE_AT_BROWSER_CLOSE=True # Invalid session
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# LOCAL SETTING
 PDF_LOCATION = "/home/farid/pdfs/"
-COVER_LOCATION = os.path.join(BASE_DIR, "static", "alihmedia_inactive", "cover")
-COVER_URL = os.path.join("alihmedia_inactive", "cover")
+COVER_LOCATION = os.path.join(BASE_DIR, "static", "cover")
+COVER_URL = "cover/"
