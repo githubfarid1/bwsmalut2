@@ -51,7 +51,38 @@
                     display: false
                 }
             }
-      });
+        });
+        var ctx = document.getElementById('chartscan').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ docdate|safe }}, //loop through queryset,
+                datasets: [{
+                    label: '',
+                    data: {{ docscan|safe }},
+                    backgroundColor: {{ doccolor|safe }},
+                    borderColor:{{ doccolor|safe }},
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        id: 'A',
+                        type: 'linear',
+                        position: 'left',
+                        ticks: {
+                            max: 100,
+                            min: 0
+                        }
+                      }]
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
+
 
     });
 </script>
@@ -74,4 +105,16 @@
   
   </div>
 </div>
+<div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Jumlah Halaman scan perhari</h5>
+          <canvas id="chartscan" width="400" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
 {% endblock %}
