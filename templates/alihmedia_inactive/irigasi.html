@@ -39,7 +39,7 @@
   <table class="table">
     <thead>
       <tr style="background-color: beige">
-        <th scope="col">#</th>
+        {% comment %} <th scope="col">#</th> {% endcomment %}
         <th scope="col">BOX</th>
         <th scope="col">NO BERKAS</th>
         <th scope="col">NO URUT</th>
@@ -57,7 +57,7 @@
     <tbody>
       {% for d in data %}
       <tr>
-        <td>{{ d.row_number }}</td>
+        {% comment %} <td>{{ d.row_number }}</td> {% endcomment %}
         {% if d.box_number != "" %}
         <td rowspan="{{ d.boxspan }}">{{ d.box_number }}</td>
         {% endif %} {% if d.bundle_number != "" %}
@@ -76,35 +76,21 @@
         </td>
         {% endcomment %} {% if d.pdffound %}
         <td>
-          <div class="card border-danger">
-            <div class="card-header text-danger">{{ d.doc_description }}</div>
+          <div class="card border-info">
+            <div class="card-header text-info"><small>{{ d.filesize }} kb / {{ d.pagecount }} pages</small>
+              <div style="float: right;"><a href="{% url 'pdfdownload' link d.doc_id %}" target="_new" class="btn btn-success btn-sm">
+                <i class="bi-download"></i>
+              </a>
+              <a href="{% static d.coverfilepath %}" target="_new" class="btn btn-info btn-sm">
+                <i class="bi-book"></i>
+              </a>            
+            </div>
+            </div>
             <div class="card-body">
-              <blockquote class="blockquote mb-0">
-                <footer class="blockquote-footer">
-                  <small>Ukuran File: </small
-                  ><cite title="Source Title"
-                    ><small>{{ d.filesize }} kb</small></cite
-                  >
-                </footer>
-                <footer class="blockquote-footer">
-                  <small>Jumlah Halaman: </small
-                  ><cite title="Source Title"
-                    ><small>{{ d.pagecount }}</small></cite
-                  >
-                </footer>
-                <a
-                  href="{% url 'pdfdownload' link d.doc_id %}"
-                  target="_new"
-                  class="btn btn-success btn-sm"
-                  >Download</a
-                >
-                <a
-                  href="{% static d.coverfilepath %}"
-                  target="_new"
-                  class="btn btn-info btn-sm"
-                  >Cover</a
-                >
-              </blockquote>
+                  <cite title="Source Title">
+                    <small>{{ d.doc_description }}</small>
+                  </cite>
+            
             </div>
           </div>
         </td>

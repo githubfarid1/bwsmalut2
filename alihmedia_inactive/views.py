@@ -257,50 +257,6 @@ def pdfdownload(request, link, doc_id):
             return response
     raise Http404    
 
-def statistics_old(request):
-    deps = Department.objects.all()
-    depnamelist = []
-    depvaluelist = []
-    colorlist = []
-    foundall = 0
-    notfoundall = 0
-    for d in deps:
-        docs = Doc.objects.filter(bundle__department_id__exact=d.id)
-        found = 0
-        notfound = 0
-        total = len(docs)
-        for ke, doc in enumerate(docs):
-            path = os.path.join(settings.PDF_LOCATION, __package__.split('.')[0], d.link, str(doc.bundle.box_number), str(doc.doc_number) + ".pdf")
-            if exists(path):
-                foundall += 1
-                found += 1
-            else:
-                notfoundall += 1
-                notfound += 1
-        depnamelist.append(" | ".join([d.name, "Sudah"]))
-        depnamelist.append(" | ".join([d.name, "Belum"]))
-        depvaluelist.append(found)
-        depvaluelist.append(notfound)
-        colorlist.append("rgba(112, 185, 239, 1)")
-        colorlist.append("rgba(244, 204, 204, 1)")
-        total = foundall + notfoundall
-        procfound = foundall / total * 100
-        procnotfound = notfoundall / total * 100
-    context = {
-        "menu": getmenu(),
-        "depnamelist": depnamelist,
-        "depvaluelist": depvaluelist,
-        "colorlist": colorlist,
-        "foundall": str(foundall),
-        "notfoundall": str(notfoundall),
-        "procfound":f"{procfound:.3f}",
-        "procnotfound":f"{procnotfound:.3f}",
-    }
-
-    return render(request=request, template_name='alihmedia_inactive/statistics.html', context=context)
-
-
-
 def statistics(request):
     deps = Department.objects.all()
     depnamelist = []
@@ -328,7 +284,8 @@ def statistics(request):
     fileinfolist = []
     allfilelist = [os.path.join(root, file) for root, dirs, files in os.walk(os.path.join(settings.PDF_LOCATION, __package__.split('.')[0])) for file in files if file.endswith(".pdf")]
     for filepath in allfilelist:
-        infotime = os.path.getmtime(filepath)
+        # infotime = os.path.getmtime(filepath)
+        infotime = os.stat(filepath).st_mtime
         infodate = datetime.fromtimestamp(infotime).strftime('%d-%m-%Y')
         mdict = {
             "file": filepath,
@@ -353,18 +310,6 @@ def statistics(request):
         docdate.append(d.strftime('%d-%m-%Y'))
         docscan.append(pages)
         doccolor.append("rgba(112, 185, 239, 1)")
-    # groupdates = {}
-    # docdate = []
-    # docscan = []
-    # doccolor = []
-    # for item in fileinfolist:
-    #     groupdates.setdefault(item['date'], []).append(item)
-
-    # for key, value in groupdates.items():
-    #     docdate.append(key)
-    #     docscan.append(len(value))
-    #     doccolor.append("rgba(112, 185, 239, 1)")
-
     context = {
         "menu": getmenu(),
         "depnamelist": depnamelist,
@@ -381,36 +326,3 @@ def statistics(request):
 
     return render(request=request, template_name='alihmedia_inactive/statistics.html', context=context)
 
-
-
-def tes1(request):
-    fileinfolist = []
-    allfilelist = [os.path.join(root, file) for root, dirs, files in os.walk(os.path.join(settings.PDF_LOCATION, __package__.split('.')[0])) for file in files if file.endswith(".pdf")]
-    for filepath in allfilelist:
-        infotime = os.path.getmtime(filepath)
-        infodate = datetime.fromtimestamp(infotime).strftime('%d-%m-%Y')
-        mdict = {
-            "file": filepath,
-            "date": infodate,
-            "pages": fitz.open(filepath).page_count
-        }
-        fileinfolist.append(mdict)
-
-    d = {}
-    
-    for item in fileinfolist:
-        d.setdefault(item['date'], []).append(item)
-    
-
-    return HttpResponse( d.values())
-
-def tes2(request):
-    l = []
-    foundlist = [os.path.join(root, file) for root, dirs, files in os.walk(os.path.join(settings.PDF_LOCATION, __package__.split('.')[0], "irigasi")) for file in files if file.endswith(".pdf")]
-    for filepath in foundlist:
-        infotime = os.path.getmtime(filepath)
-        infodate = datetime.fromtimestamp(infotime).strftime('%d-%m-%Y')
-        # infodate = time.ctime(infotime)
-        l.append(filepath + " | " + infodate)
-
-    return HttpResponse("<br/>".join(l))
