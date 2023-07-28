@@ -9,7 +9,9 @@ from django.conf import settings
 import inspect
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
+import fitz
+
 def getmenu():
     return Department.objects.all()
 
@@ -330,20 +332,38 @@ def statistics(request):
         infodate = datetime.fromtimestamp(infotime).strftime('%d-%m-%Y')
         mdict = {
             "file": filepath,
-            "date": infodate
+            "date": infodate,
+            "pages": fitz.open(filepath).page_count
         }
         fileinfolist.append(mdict)
-    groupdates = {}
-    docdate = []
+
+    num_of_dates = 30
+    start = datetime.today()
+    date_list = [start.date() - timedelta(days=x) for x in range(num_of_dates)]
+    date_list.sort()
     docscan = []
     doccolor = []
-    for item in fileinfolist:
-        groupdates.setdefault(item['date'], []).append(item)
-
-    for key, value in groupdates.items():
-        docdate.append(key)
-        docscan.append(len(value))
+    docdate = []
+    print(date_list)
+    for d in date_list:
+        pages = 0
+        for fl in fileinfolist:
+            if fl['date'] == d.strftime('%d-%m-%Y'):
+                pages += fl['pages']
+        docdate.append(d.strftime('%d-%m-%Y'))
+        docscan.append(pages)
         doccolor.append("rgba(112, 185, 239, 1)")
+    # groupdates = {}
+    # docdate = []
+    # docscan = []
+    # doccolor = []
+    # for item in fileinfolist:
+    #     groupdates.setdefault(item['date'], []).append(item)
+
+    # for key, value in groupdates.items():
+    #     docdate.append(key)
+    #     docscan.append(len(value))
+    #     doccolor.append("rgba(112, 185, 239, 1)")
 
     context = {
         "menu": getmenu(),
@@ -371,7 +391,8 @@ def tes1(request):
         infodate = datetime.fromtimestamp(infotime).strftime('%d-%m-%Y')
         mdict = {
             "file": filepath,
-            "date": infodate
+            "date": infodate,
+            "pages": fitz.open(filepath).page_count
         }
         fileinfolist.append(mdict)
 
