@@ -1,14 +1,36 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login,  logout, authenticate
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .forms import UserLoginForm, UserRegistrationForm
-
+from django.contrib.auth import login,  logout, authenticate, update_session_auth_hash
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
+from .forms import UserLoginForm, UserRegistrationForm 
+from django.http import HttpResponse, Http404
+from django.contrib import messages
 
 # Create your views here.
 
 
 # ALTERNATIVE 1
 
+
+def updatePasswordRequest(request):
+    if not request.user.is_authenticated:
+        return redirect('front_page')
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.info(request, 'Ubah Password sukses, Silahkan login lagi!!')
+            logout(request)
+            return redirect('front_page')
+        else:
+            messages.info(request, 'Berikan password yang benar sesuai format..!!')
+            return redirect('update_password')
+    else:
+        form = PasswordChangeForm(user=request.user)
+        
+    context = {'form' : form}
+    return render(request, 'update_password.html', context)
+    
 
 def home(request):
     if not request.user.is_authenticated:

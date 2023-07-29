@@ -10,5 +10,8 @@ urlpatterns = [
     path('landingPage/', views.landingPage,name='landingPage'),
     path('register/', views.UserRegistrationRequest, name='register'),
     path('login/', views.UserLoginRequest, name='login'),
-    path('logout', views.UserLogoutRequest, name='logout')
+    path('logout', views.UserLogoutRequest, name='logout'),
+    path('update_password/', views.updatePasswordRequest , name='update_password'),
+
+
 ]

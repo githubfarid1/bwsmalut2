@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 {% include 'alihmedia_inactive/menu.html'%}
 <div class="container">
+  {% include 'messages.html'%}
   <h3>Monitoring Alih Media Data Inaktif</h3>
   <div class="summary">
     <form action="{% url link %}" class="row g-3" style="float: right">

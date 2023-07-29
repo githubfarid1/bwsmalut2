@@ -98,7 +98,7 @@
             <button class="btn m-1" style="float: right; color: antiquewhite">
               Selamat Datang, {{user.username|title }}
             </button>
-            <a href="#"
+            <a href="{% url 'update_password' %}"
               ><button class="btn m-1 btn-outline-warning" type="submit">
                 Ganti Password
               </button></a
