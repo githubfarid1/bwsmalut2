@@ -11,7 +11,8 @@ from .forms import UserLoginForm, UserRegistrationForm
 
 
 def home(request):
-
+    if not request.user.is_authenticated:
+        return redirect("/")
     return render(request,'homePage.html')
 
 def front_page(request):
