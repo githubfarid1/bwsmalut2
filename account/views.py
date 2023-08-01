@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from .forms import UserLoginForm, UserRegistrationForm 
 from django.http import HttpResponse, Http404
 from django.contrib import messages
-
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 
@@ -61,6 +61,7 @@ def UserRegistrationRequest(request):
 
 
 
+@csrf_exempt
 def UserLoginRequest(request):
     if request.method == 'POST':
         form = UserLoginForm(request, request.POST)
