@@ -205,7 +205,7 @@ def air_baku(request):
         "years": summary[4],
         "menu": getmenu(),
     }
-    return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
+    return render(request=request, template_name='alihmedia_inactive/irigasi2.html', context=context)
 
 def sungai(request):
     if not request.user.is_authenticated:
@@ -223,7 +223,7 @@ def sungai(request):
         "years": summary[4],
         "menu": getmenu(),
     }
-    return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
+    return render(request=request, template_name='alihmedia_inactive/irigasi2.html', context=context)
 
 def pantai(request):
     if not request.user.is_authenticated:
@@ -242,7 +242,7 @@ def pantai(request):
         "years": summary[4],
         "menu": getmenu(),
     }
-    return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
+    return render(request=request, template_name='alihmedia_inactive/irigasi2.html', context=context)
 
 def keuangan(request):
     if not request.user.is_authenticated:
@@ -261,7 +261,7 @@ def keuangan(request):
         "years": summary[4],
         "menu": getmenu(),
     }
-    return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
+    return render(request=request, template_name='alihmedia_inactive/irigasi2.html', context=context)
 
 def pdfdownload(request, link, doc_id):
     if not request.user.is_authenticated:
