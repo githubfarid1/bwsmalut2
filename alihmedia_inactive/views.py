@@ -11,6 +11,7 @@ import sys
 import time
 from datetime import datetime, timedelta
 import fitz
+from django_user_agents.utils import get_user_agent
 
 def getmenu():
     return Department.objects.all()
@@ -166,6 +167,7 @@ def summarydata(data):
     return (len(data), sumscan, sumnotscan, percent, unyearstr )
 
 def irigasi(request):
+    user_agent = get_user_agent(request)
     if not request.user.is_authenticated:
         return redirect('front_page')
     funcname = sys._getframe().f_code.co_name
@@ -181,8 +183,11 @@ def irigasi(request):
         "years": summary[4],
         "menu": getmenu(),
     }
-    
-    return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
+    return render(request=request, template_name='alihmedia_inactive/irigasi2.html', context=context)
+    # if user_agent.is_mobile:
+    #     return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
+    # else:
+    #     return render(request=request, template_name='alihmedia_inactive/irigasi.html', context=context)
 
 def air_baku(request):
     if not request.user.is_authenticated:
@@ -344,3 +349,10 @@ def statistics(request):
 
     return render(request=request, template_name='alihmedia_inactive/statistics.html', context=context)
 
+
+def tes(request):
+    context = {
+        "menu": getmenu(),
+
+    }
+    return render(request=request, template_name='alihmedia_inactive/tes.html', context=context)

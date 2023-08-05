@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_auto_logout.middleware.auto_logout', # auto logout
+    # 'alihmedia_inactive.middleware.NgrokSkipBrowserWarningMiddleware', # farid
 ]
 
 ROOT_URLCONF = 'auth_validator.urls'
@@ -146,8 +147,8 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # auto logout
 AUTO_LOGOUT = {
-    'IDLE_TIME': timedelta(minutes=5),
-    'SESSION_TIME': timedelta(minutes=30),
+    'IDLE_TIME': timedelta(minutes=20),
+    'SESSION_TIME': timedelta(minutes=60),
     'MESSAGE': 'The session has expired. Please login again to continue.',
     'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
 }
