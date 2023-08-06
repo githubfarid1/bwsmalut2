@@ -20,4 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('account.urls')),
     path('alihmedia_inactive/', include('alihmedia_inactive.urls')),
+    path('utility/', include('utility.urls')),
+
 ]

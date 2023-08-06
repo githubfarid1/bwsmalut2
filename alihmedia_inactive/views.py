@@ -346,13 +346,40 @@ def statistics(request):
         "docscan": docscan,
         "doccolor": doccolor,
     }
-
     return render(request=request, template_name='alihmedia_inactive/statistics.html', context=context)
 
+def boxsearch(request, link, box_number):
+    if not request.user.is_authenticated:
+        return redirect('front_page')
+    d = Department.objects.get(link=link)
+    depname = d.name
+    docs = Doc.objects.filter(bundle__department_id__exact=d.id, bundle__box_number__exact=box_number)
+    boxdata = []
+    for ke, doc in enumerate(docs):
+        path = os.path.join(settings.PDF_LOCATION, __package__.split('.')[0], d.link, str(doc.bundle.box_number), str(doc.doc_number) + ".pdf")
+        pdffound = False
+        coverfilename = ""
+        if exists(path):
+            pdffound = True
+            coverfilename = "{}_{}_{}_{}.png".format(__package__.split('.')[0], d.link, doc.bundle.box_number, doc.doc_number)
+        boxdata.append({
+            "box_number": doc.bundle.box_number,
+            "bundle_number": doc.bundle.bundle_number,
+            "doc_number": doc.doc_number,
+            "bundle_code": doc.bundle.code,
+            "bundle_title": doc.bundle.title,
+            "bundle_year": doc.bundle.year,
+            "doc_description": doc.description,
+            "doc_count": doc.doc_count,
+            "bundle_orinot": doc.bundle.orinot,
+            "row_number": ke + 1,
+            "pdffound": pdffound,
+            "doc_id": doc.id,
+            "coverfilepath": os.path.join(settings.COVER_URL, coverfilename),
+            "filesize": doc.filesize,
+            "pagecount": doc.page_count,
+        })
 
-def tes(request):
-    context = {
-        "menu": getmenu(),
-
-    }
-    return render(request=request, template_name='alihmedia_inactive/tes.html', context=context)
+    # return HttpResponse(docs[2].bundle.title)
+    context = {'data':boxdata, 'depname':depname, 'box_number': box_number, "link": link}
+    return render(request=request, template_name='alihmedia_inactive/boxsearch2.html', context=context)
