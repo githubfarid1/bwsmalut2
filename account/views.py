@@ -39,7 +39,7 @@ def home(request):
 
 def front_page(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('/alihmedia_inactive/statistics')
     else:
         return render(request,'front_page.html')
 
@@ -71,7 +71,7 @@ def UserLoginRequest(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return redirect('/alihmedia_inactive/statistics')
     else:
         form = UserLoginForm()
     context = {'form' : form}
