@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import SearchQRCodeForm
 from django.http import HttpResponse, Http404
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def qrcodesearch(request):
     if not request.user.is_authenticated:
         return redirect("/")

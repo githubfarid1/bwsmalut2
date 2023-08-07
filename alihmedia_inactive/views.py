@@ -11,6 +11,7 @@ import sys
 import time
 from datetime import datetime, timedelta
 import fitz
+
 # from django_user_agents.utils import get_user_agent
 
 def getmenu():
