@@ -11,7 +11,7 @@ import sys
 import time
 from datetime import datetime, timedelta
 import fitz
-from django_user_agents.utils import get_user_agent
+# from django_user_agents.utils import get_user_agent
 
 def getmenu():
     return Department.objects.all()
@@ -167,7 +167,7 @@ def summarydata(data):
     return (len(data), sumscan, sumnotscan, percent, unyearstr )
 
 def irigasi(request):
-    user_agent = get_user_agent(request)
+    # user_agent = get_user_agent(request)
     if not request.user.is_authenticated:
         return redirect('front_page')
     funcname = sys._getframe().f_code.co_name
