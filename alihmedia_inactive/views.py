@@ -274,7 +274,7 @@ def pdfdownload(request, link, doc_id):
         filename = f"{__package__.split('.')[0]}_{link}_{doc.bundle.box_number}_{doc.doc_number}.pdf"
         with open(path, 'rb') as pdf:
             response = HttpResponse(pdf.read(), content_type='application/pdf')
-            response['Content-Disposition'] = f'inline;filename={filename}.pdf'
+            response['Content-Disposition'] = f'inline;filename={filename}'
             return response
     raise Http404    
 
